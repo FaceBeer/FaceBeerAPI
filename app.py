@@ -1,4 +1,4 @@
-from flask import Flask, request, make_response
+from flask import Flask, request, make_response, jsonify
 from dao import DAO
 
 app = Flask(__name__)
@@ -25,7 +25,7 @@ def leaderboard():
     else:
         rows = dao.get_all_rows()
         response.headers.add("Access-Control-Allow-Origin", "*")
-        response.response = {"code": 500, "message": rows}
+        response.response = jsonify({"code": 500, "message": rows})
         return response
 
 
