@@ -24,7 +24,8 @@ def leaderboard():
         return response
     else:
         rows = dao.get_all_rows()
-        response = {"code": 500, "message": rows}
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        response.response = {"code": 500, "message": rows}
         return response
 
 
