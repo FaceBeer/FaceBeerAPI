@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, make_response
 from dao import DAO
 
 app = Flask(__name__)
@@ -14,11 +14,18 @@ def reset():
     dao.reset()
 
 
-@app.route("/get_leaderboard", methods=["GET"])
+@app.route("/get_leaderboard", methods=["GET", "OPTIONS"])
 def leaderboard():
-    rows = dao.get_all_rows()
-    response = {"code": 500, "message": rows}
-    return response
+    response = make_response()
+    if request.method == "OPTIONS":
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        response.headers.add('Access-Control-Allow-Headers', "*")
+        response.headers.add('Access-Control-Allow-Methods', "*")
+        return response
+    else:
+        rows = dao.get_all_rows()
+        response = {"code": 500, "message": rows}
+        return response
 
 
 @app.route("/append", methods=["POST"])
