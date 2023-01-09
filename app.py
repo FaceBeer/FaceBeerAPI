@@ -9,6 +9,11 @@ def index():
     return "Bonjour world! from FaceBeer API"
 
 
+@app.route("/reset")
+def reset():
+    dao.reset()
+
+
 @app.route("/get_leaderboard", methods=["GET"])
 def leaderboard():
     rows = dao.get_all_rows()
