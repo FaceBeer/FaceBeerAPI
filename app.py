@@ -10,7 +10,7 @@ def index():
 
 
 @app.route("/get_leaderboard", methods=["GET"])
-def test_pull():
+def leaderboard():
     rows = dao.get_all_rows()
     response = {"code": 500, "message": rows}
     return response
