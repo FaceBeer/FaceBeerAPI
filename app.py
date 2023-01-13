@@ -36,6 +36,7 @@ def user_leaderboard():
     name = request.form["name"]
     rows = dao.get_user(name)
     response.headers.add("Access-Control-Allow-Origin", "*")
+    response.headers.add("Content-Type", "*")
     response.headers.add('Access-Control-Allow-Headers', "*")
     response.headers.add('Access-Control-Allow-Methods', "*")
     response.response = json.dumps({"code": 200, "message": rows})
