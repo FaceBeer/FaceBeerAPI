@@ -26,7 +26,7 @@ def all_user_leaderboard():
     else:
         rows = dao.get_all_rows()
         response.headers.add("Access-Control-Allow-Origin", "*")
-        response.response = json.dumps({"code": 500, "message": rows})
+        response.response = json.dumps({"code": 200, "message": rows})
         return response
 
 @app.route("/get_user", methods=["POST", "OPTIONS"])
@@ -51,7 +51,7 @@ def add_reading():
     bac = request.form["bac"]
     timestamp = request.form["timestamp"]
     dao.add_item(name, bac, timestamp)
-    response = {"code": 500, "message": "Successfully added row"}
+    response = {"code": 200, "message": "Successfully added row"}
     return response
 
 
