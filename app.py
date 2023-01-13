@@ -30,22 +30,16 @@ def all_user_leaderboard():
         return response
 
 
-@app.route("/get_user", methods=["POST", "OPTIONS"])
+@app.route("/get_user", methods=["POST"])
 def user_leaderboard():
     response = make_response()
     name = request.form["name"]
-    if request.method == "OPTIONS":
-        response.headers.add("Access-Control-Allow-Origin", "*")
-        response.headers.add('Access-Control-Allow-Headers', "*")
-        response.headers.add('Access-Control-Allow-Methods', "*")
-        return response
-    else:
-        rows = dao.get_user(name)
-        response.headers.add("Access-Control-Allow-Origin", "*")
-        response.headers.add('Access-Control-Allow-Headers', "*")
-        response.headers.add('Access-Control-Allow-Methods', "*")
-        response.response = json.dumps({"code": 200, "message": rows})
-        return response
+    rows = dao.get_user(name)
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    response.headers.add('Access-Control-Allow-Headers', "*")
+    response.headers.add('Access-Control-Allow-Methods', "*")
+    response.response = json.dumps({"code": 200, "message": rows})
+    return response
 
 
 @app.route("/append", methods=["POST"])
