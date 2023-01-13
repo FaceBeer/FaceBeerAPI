@@ -30,10 +30,9 @@ def all_user_leaderboard():
         return response
 
 
-@app.route("/get_user", methods=["POST","OPTIONS"])
-def user_leaderboard():
+@app.route("/user/<name>", methods=["GET","OPTIONS"])
+def user_leaderboard(name):
     response = make_response()
-    name = request.form["name"]
     rows = dao.get_user(name)
     if request.method == "OPTIONS":
         response.headers.add("Access-Control-Allow-Origin", "*")
