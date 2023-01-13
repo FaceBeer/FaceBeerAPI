@@ -50,10 +50,19 @@ class DAO:
         except KeyError:
             print("Scan failed")
 
+    def get_user(self, name):
+        items = self.get_all_rows()
+        output = []
+        for row in items:
+            if row["name"] == name.title():
+                output.append(row)
+        return output
+
+
 
 if __name__ == "__main__":
     dao = DAO()
     # dao.create_table()
     # dao.add_item("Grant", Decimal(0.5), "11/30/2001")
     # dao.add_item("Grant", Decimal(0.5), "11/30/2002")
-    print(*dao.get_all_rows(), sep='\n')
+    print(*dao.get_user("grant"), sep='\n')
