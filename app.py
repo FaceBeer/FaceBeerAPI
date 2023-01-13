@@ -29,6 +29,7 @@ def all_user_leaderboard():
         response.response = json.dumps({"code": 200, "message": rows})
         return response
 
+
 @app.route("/get_user", methods=["POST", "OPTIONS"])
 def user_leaderboard():
     response = make_response()
@@ -41,7 +42,9 @@ def user_leaderboard():
     else:
         rows = dao.get_user(name)
         response.headers.add("Access-Control-Allow-Origin", "*")
-        response.response = json.dumps({"code": 500, "message": rows})
+        response.headers.add('Access-Control-Allow-Headers', "*")
+        response.headers.add('Access-Control-Allow-Methods', "*")
+        response.response = json.dumps({"code": 200, "message": rows})
         return response
 
 
