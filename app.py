@@ -39,6 +39,7 @@ def user_leaderboard():
         response.headers.add("Access-Control-Allow-Origin", "*")
         response.headers.add('Access-Control-Allow-Headers', "*")
         response.headers.add('Access-Control-Allow-Methods', "*")
+        response.headers.add('Access-Control-Allow-Credentials', True)
     else:
         response.headers.add("Access-Control-Allow-Origin", "*")
         response.response = json.dumps({"code": 200, "message": rows})
