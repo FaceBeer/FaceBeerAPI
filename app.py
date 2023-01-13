@@ -35,11 +35,12 @@ def user_leaderboard():
     response = make_response()
     name = request.form["name"]
     rows = dao.get_user(name)
-    response.headers.add("Access-Control-Allow-Origin", "*")
-    response.headers.add('Access-Control-Allow-Headers', "*")
-    response.headers.add('Access-Control-Allow-Methods', "*")
-    response.headers.add("Content-Type", '*')
-    if request.method == "POST":
+    if request.method == "OPTIONS":
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        response.headers.add('Access-Control-Allow-Headers', "*")
+        response.headers.add('Access-Control-Allow-Methods', "*")
+    else:
+        response.headers.add("Access-Control-Allow-Origin", "*")
         response.response = json.dumps({"code": 200, "message": rows})
     print(response.headers)
     return response
